@@ -8,30 +8,27 @@ x-veld:
         path: /veld/input/data.xml
         content: "dummy data"
       b:
-        type: "docker network"
-        name: "basex_loader_network"
-      c:
         id: "user"
         type: "environment variable"
-      d:
+      c:
         id: "password"
         type: "environment variable"
-      e:
-        id: "url"
+      d:
+        id: "host"
         type: "environment variable"
-      f:
+      e:
         id: "database_name"
         type: "environment variable"
     output:
-      type: "service"
+      type: "BaseX http endpoint"
+    docker_context:
+      type: "docker network"
+      optional: true
 
 services:
   veld:
     image: curlimages/curl:8.2.1 
-    command: curl -X PUT -u admin:admin -T /veld/input/data.xml "veld_db:8984/rest/veld_dummy_database/data.xml"
-    networks:
-      - basex_loader_network 
-
-networks:
-  basex_loader_network:
+    volumes:
+      - ./src/load.sh:/veld/executable/load.sh
+    command: sh /veld/executable/load.sh
 
