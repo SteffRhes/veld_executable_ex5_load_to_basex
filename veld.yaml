@@ -1,0 +1,37 @@
+x-veld:
+  executable:
+    about:
+      description: "dummy veld for testing and showcasing"
+    input:
+      a:
+        type: "xml"
+        path: /veld/input/data.xml
+        content: "dummy data"
+      b:
+        type: "docker network"
+        name: "basex_loader_network"
+      c:
+        id: "user"
+        type: "environment variable"
+      d:
+        id: "password"
+        type: "environment variable"
+      e:
+        id: "url"
+        type: "environment variable"
+      f:
+        id: "database_name"
+        type: "environment variable"
+    output:
+      type: "service"
+
+services:
+  veld:
+    image: curlimages/curl:8.2.1 
+    command: curl -X PUT -u admin:admin -T /veld/input/data.xml "veld_db:8984/rest/veld_dummy_database/data.xml"
+    networks:
+      - basex_loader_network 
+
+networks:
+  basex_loader_network:
+
