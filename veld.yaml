@@ -8,17 +8,17 @@ x-veld:
         path: /veld/input/data.xml
         content: "dummy data"
       b:
+        type: "environment variable"
         id: "user"
-        type: "environment variable"
       c:
+        type: "environment variable"
         id: "password"
-        type: "environment variable"
       d:
+        type: "environment variable"
         id: "host"
-        type: "environment variable"
       e:
-        id: "database_name"
         type: "environment variable"
+        id: "database_name"
     output:
       type: "BaseX http endpoint"
     docker_context:
