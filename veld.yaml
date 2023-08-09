@@ -1,29 +1,33 @@
 x-veld:
   executable:
     about:
-      description: "dummy veld for testing and showcasing"
+      description: "example veld for testing and showcasing"
     input:
       a:
-        type: "xml"
-        path: /veld/input/data.xml
+        type: "files"
+        format: "xml"
         content: "dummy data"
+        path: /veld/input/data.xml
       b:
         type: "environment variable"
-        id: "user"
+        name: "user"
       c:
         type: "environment variable"
-        id: "password"
+        name: "password"
       d:
         type: "environment variable"
-        id: "host"
+        name: "host"
       e:
         type: "environment variable"
-        id: "database_name"
+        name: "database_name"
     output:
-      type: "BaseX http endpoint"
-    docker_context:
-      type: "docker network"
-      optional: true
+      a:
+        type:
+          - "BaseX HTTP endpoint"
+          - "REST API"
+      b:
+        type: "Docker network"
+        optional: true
 
 services:
   veld:
