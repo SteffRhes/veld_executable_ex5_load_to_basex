@@ -29,6 +29,6 @@ services:
   veld:
     image: curlimages/curl:8.2.1 
     volumes:
-      - ./src/load.sh:/veld/executable/load.sh
+      - ./load.sh:/veld/executable/load.sh
     command: sh /veld/executable/load.sh
 
