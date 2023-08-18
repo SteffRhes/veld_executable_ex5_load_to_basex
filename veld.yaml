@@ -23,9 +23,9 @@ x-veld:
         type: "environment variable"
         name: "database_name"
     # Note that output does not necessarily mean "this executable produces an output", but rather
-    # communicates the direction this executable can be wired to. In this executable here, we have
-    # both an endpoint and a docker network as output, which does not mean, that this veld produces
-    # such, but rather that its outgoing connections can be wired to such types
+    # communicates the direction it can be wired to. In this executable here, we have both an
+    # endpoint and a docker network as output, which does not mean, that this veld produces such,
+    # but rather that its outgoing connections go along such routes (or data flowing along it)
     output:
       -
         type:
@@ -35,15 +35,14 @@ x-veld:
       -
         # As with the BaseX service, this executable here does not necessarily require a docker
         # network as it could just connect to any host. It is just likely that if it's supposed to
-        # connect to another veld / docker service, it might require a docker network.
+        # connect to another veld / docker service, it would require a docker network
         type: "Docker network"
         optional: true
 
 services:
   veld:
-    # If it's not needed to modify a docker image / build context, then you can reference the image
-    # right here as well. It works in this case as we don't need to modify user access rights, as
-    # this image never writes to a filesystem, but just connects via HTTP
+    # If it's not needed to modify a docker image / build context, then the image itself can be
+    # referenced right here as well.
     image: curlimages/curl:8.2.1 
     volumes:
       - ./load.sh:/veld/executable/load.sh
